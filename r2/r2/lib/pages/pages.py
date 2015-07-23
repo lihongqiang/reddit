@@ -1882,8 +1882,10 @@ class CommentPane(Templated):
         else:
             g.log.debug("using comment page cache")
             key = self.cache_key()
+            # print key
             self.rendered = g.pagecache.get(key)
-
+            # print self.rendered
+            # print 'happen here'
             if self.rendered:
                 cache_hit = True
 
@@ -1928,6 +1930,8 @@ class CommentPane(Templated):
                     c.user = user
                     c.user_is_loggedin = logged_in
 
+
+            # print "yes"
             # figure out what needs to be updated on the listing
             if c.user_is_loggedin:
                 likes = []
@@ -1961,7 +1965,7 @@ class CommentPane(Templated):
                                               gildings = gildings,
                                               saves = saves).render()
                 timer.intermediate("thingupdater")
-
+            # print "yes2"
         if try_cache:
             if cache_hit:
                 timer.stop("hit")
@@ -4928,10 +4932,14 @@ class LinkCommentsSettings(Templated):
     def __init__(self, link, sort, suggested_sort):
         Templated.__init__(self)
         self.sr = link.subreddit_slow
+
+
         self.link = link
         self.is_author = c.user_is_loggedin and c.user._id == link.author_id
         self.contest_mode = link.contest_mode
         stickied_fullnames = self.sr.get_sticky_fullnames()
+
+
         self.stickied = link._fullname in stickied_fullnames
         self.stickies_full = len(stickied_fullnames) >= Subreddit.MAX_STICKIES
         self.sendreplies = link.sendreplies

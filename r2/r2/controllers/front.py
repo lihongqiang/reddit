@@ -421,13 +421,14 @@ class FrontController(RedditController):
             css_class='suggested' if suggested_sort_active else '',
             suggested_sort=suggested_sort,
         )
+        # print 'hehe'
+        # print article.subreddit_slow
 
         link_settings = LinkCommentsSettings(
             article,
             sort=sort,
             suggested_sort=suggested_sort,
         )
-
         res = LinkInfoPage(link=article, comment=comment,
                            content=displayPane,
                            page_classes=['comments-page'],
