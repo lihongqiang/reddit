@@ -1175,6 +1175,7 @@ class Subreddit(Thing, Printable, BaseSite):
             else:
                 self.sticky_fullnames = []
             self._commit()
+            return []
 
         return self.sticky_fullnames
 
